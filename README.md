@@ -1,4 +1,9 @@
 
+Fork of [ArduinoOTA](https://github.com/JAndrassy/ArduinoOTA) with the following changes:
+* Replace use of `Serial` in `debugPrint()` with `SERIAL_PORT_MONITOR`
+* Create function to get the same information `debugPrint()` prints allowing to further handle these values / customize the output.
+* Create function to get `STORAGE_START_ADDRESS` used in InternalStorage.
+
 # Arduino library to update the sketch over the network
 
 This library allows you to update sketches on your board over WiFi or Ethernet.

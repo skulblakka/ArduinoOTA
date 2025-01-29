@@ -37,16 +37,24 @@ InternalStorageClass::InternalStorageClass() :
 }
 
 void InternalStorageClass::debugPrint() {
-  Serial.print("SKETCH_START_ADDRESS ");
-  Serial.println(SKETCH_START_ADDRESS);
-  Serial.print("PAGE_SIZE ");
-  Serial.println(PAGE_SIZE);
-  Serial.print("MAX_FLASH ");
-  Serial.println(MAX_FLASH);
-  Serial.print("MAX_PARTIONED_SKETCH_SIZE ");
-  Serial.println(MAX_PARTIONED_SKETCH_SIZE);
-  Serial.print("STORAGE_START_ADDRESS ");
-  Serial.println(STORAGE_START_ADDRESS);
+  SERIAL_PORT_MONITOR.print("SKETCH_START_ADDRESS ");
+  SERIAL_PORT_MONITOR.println(SKETCH_START_ADDRESS);
+  SERIAL_PORT_MONITOR.print("PAGE_SIZE ");
+  SERIAL_PORT_MONITOR.println(PAGE_SIZE);
+  SERIAL_PORT_MONITOR.print("MAX_FLASH ");
+  SERIAL_PORT_MONITOR.println(MAX_FLASH);
+  SERIAL_PORT_MONITOR.print("MAX_PARTIONED_SKETCH_SIZE ");
+  SERIAL_PORT_MONITOR.println(MAX_PARTIONED_SKETCH_SIZE);
+  SERIAL_PORT_MONITOR.print("STORAGE_START_ADDRESS ");
+  SERIAL_PORT_MONITOR.println(STORAGE_START_ADDRESS);
+}
+
+void InternalStorageClass::debugInfo(struct InternalStorageInfo *info) {
+  info->sketchStartAddress = SKETCH_START_ADDRESS;
+  info->pageSize = PAGE_SIZE;
+  info->maxFlash = MAX_FLASH;
+  info->maxPartitionedSketchSize = MAX_PARTIONED_SKETCH_SIZE;
+  info->storageStartAddress = STORAGE_START_ADDRESS;
 }
 
 extern "C" {
@@ -215,6 +223,11 @@ void InternalStorageClass::apply()
 long InternalStorageClass::maxSize()
 {
   return MAX_PARTIONED_SKETCH_SIZE;
+}
+
+long InternalStorageClass::startAddress()
+{
+  return STORAGE_START_ADDRESS;
 }
 
 InternalStorageClass InternalStorage;

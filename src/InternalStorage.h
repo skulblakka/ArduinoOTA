@@ -26,6 +26,14 @@
 
 #include "OTAStorage.h"
 
+struct InternalStorageInfo {
+  uint32_t sketchStartAddress;
+  uint32_t pageSize;
+  uint32_t maxFlash;
+  uint32_t maxPartitionedSketchSize;
+  uint32_t storageStartAddress;
+};
+
 class InternalStorageClass : public OTAStorage {
 public:
 
@@ -37,8 +45,10 @@ public:
   virtual void clear();
   virtual void apply();
   virtual long maxSize();
+  long startAddress();
 
   void debugPrint();
+  void debugInfo(struct InternalStorageInfo *info);
 
 private:
   const uint32_t MAX_PARTIONED_SKETCH_SIZE, STORAGE_START_ADDRESS;
